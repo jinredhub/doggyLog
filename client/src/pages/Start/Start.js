@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
 import './Start.css';
 import groupLogo from '../../assets/group.png';
 import doggyDataLogo from '../../assets/doggyData.png';
@@ -10,6 +13,8 @@ class Start extends Component {
     };
 
     render(){
+        console.log('=========', this.state);
+        console.log('this props, Start page: ', this.props);
 
         return (
             <div className='Start'>
@@ -21,15 +26,16 @@ class Start extends Component {
                             <img src={groupLogo} alt="group logo" style={{width: '105px'}}/>
                         </div>
 
-                        <h1 style={{paddingTop: '38px'}}>We're excited to meet NAME!</h1>
+                        <h1 style={{paddingTop: '38px'}}>We're excited to meet {this.props.newDogGlobal.name}!</h1>
 
                         <div style={{paddingTop: '58px'}}>
+                            <Link to='/basic-info'>
                             <Button 
-                                href='/basic-info'
                                 variant='contained'
                                 style={{backgroundColor: '#553635', color: 'white', fontSize: '14px'}}
                             >START LOGGING
                             </Button>
+                            </Link>
                         </div>
                     </div>
                 </section>
@@ -38,4 +44,11 @@ class Start extends Component {
     }
 }
 
-export default Start;
+// access state in reducer
+const mapStateToProps = state =>{
+    return {
+        newDogGlobal: state.addNewDogRedu.newDog,
+    }
+}
+
+export default connect(mapStateToProps)(Start);

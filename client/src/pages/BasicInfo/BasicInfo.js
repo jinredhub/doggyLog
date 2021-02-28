@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
 import './BasicInfo.css';
 import groupLogo from '../../assets/group.png';
 import doggyDataLogo from '../../assets/doggyData.png';
@@ -9,11 +12,15 @@ import TextField from '@material-ui/core/TextField';
 
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
+import * as actionCreators from '../../store/actions/index';
+
 class BasicInfo extends Component {
     state={
-        month: '',
-        day: '',
-        year: '',
+        date: {
+            month: '',
+            day: '',
+            year: '',
+        },
         weight: '',
     };
 
@@ -23,18 +30,27 @@ class BasicInfo extends Component {
         console.log('ev: ', ev);
 
         if(type === 'month'){
+            const date = {...this.state.date};
+            date.month = val;
+
             this.setState({
-                month: val,
+                date: date,
             });
         }
         else if(type === 'day'){
+            const date = {...this.state.date};
+            date.day = val;
+
             this.setState({
-                day: val,
+                date: date,
             });
         }
         else if(type === 'year'){
+            const date = {...this.state.date};
+            date.year = val;
+
             this.setState({
-                year: val,
+                date: date,
             });
         }
         else if(type === 'weight'){
@@ -45,6 +61,9 @@ class BasicInfo extends Component {
     }
 
     render(){
+        console.log('=========', this.state);
+        console.log('this props, BasicInfo page: ', this.props);
+
         const theme = createMuiTheme({
             palette: {
                 primary: {
@@ -65,18 +84,18 @@ class BasicInfo extends Component {
                             <div className='dogImgBg'>
                                 <img src={groupLogo} alt="group logo" style={{width: '45px'}}/>
                             </div>
-                            <div style={{paddingTop: '10px', color: '#b79593', fontSize: '16px'}}>NAME</div>
+                            <div style={{paddingTop: '10px', color: '#b79593', fontSize: '16px'}}>{this.props.newDogGlobal.name}</div>
                         </div>
 
                         <h1 style={{paddingTop: '53px'}}>Basic Info</h1>
 
                         <div style={{paddingTop: '45px', fontSize: '10px', color: '#b79593'}}>DATE</div>
 
-                        <div style={{paddingTop: '19px'}} className='disp-flex'>
+                        <div style={{paddingTop: '19px', flexWrap: 'nowrap'}} className='disp-flex'>
                             <div className='flex-33' style={{paddingRight: '10px'}}>
                                 <Select 
                                     onChange={(ev)=>this.inputHandler(ev, 'month')}
-                                    value={this.state.month}
+                                    value={this.state.date.month}
                                     style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
                                     variant='filled'
                                 >
@@ -97,7 +116,7 @@ class BasicInfo extends Component {
                             <div className='flex-33' style={{paddingRight: '5px'}}>
                                 <Select 
                                     onChange={(ev)=>this.inputHandler(ev, 'day')}
-                                    value={this.state.day}
+                                    value={this.state.date.day}
                                     style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
                                     variant='filled'
                                 >
@@ -136,7 +155,7 @@ class BasicInfo extends Component {
                             <div className='flex-33' style={{paddingLeft: '5px'}}>
                                 <Select 
                                     onChange={(ev)=>this.inputHandler(ev, 'year')}
-                                    value={this.state.year}
+                                    value={this.state.date.year}
                                     style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
                                     variant='filled'
                                 >
@@ -165,13 +184,15 @@ class BasicInfo extends Component {
                             />
                         </div>
 
-                        <div style={{paddingTop: '139px', textAlign: 'center'}}>
-                            <Button 
-                                href='/behavioral'
-                                variant='contained'
-                                style={{backgroundColor: '#553635', color: 'white', fontSize: '14px', padding: '18px 23px', 'borderRadius': '10px'}}
-                            >NEXT
-                            </Button>
+                        <div style={{paddingTop: '139px', paddingBottom: '60px' ,textAlign: 'center'}}>
+                            <Link to='/behavioral'>
+                                <Button 
+                                    variant='contained'
+                                    style={{backgroundColor: '#553635', color: 'white', fontSize: '14px', padding: '18px 23px', 'borderRadius': '10px'}}
+                                    onClick={()=>this.props.onDogBasicInfoAdded(this.state.weight, this.state.date)}
+                                >NEXT
+                                </Button>
+                            </Link>
                         </div>
                     </section>
                 </div>
@@ -180,4 +201,17 @@ class BasicInfo extends Component {
     }
 }
 
-export default BasicInfo;
+// access state in reducer
+const mapStateToProps = state =>{
+    return {
+        newDogGlobal: state.addNewDogRedu.newDog,
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        onDogBasicInfoAdded: (weight, date) => dispatch(actionCreators.addDogBasicInfo(weight, date)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasicInfo);
