@@ -178,6 +178,7 @@ class BasicInfo extends Component {
 
                             <div style={{paddingTop: '50px'}}>
                                 <TextField
+                                    type='number'
                                     label='WEIGHT'
                                     id='WEIGHT'
                                     onChange={(ev)=>this.inputHandler(ev, 'weight')}

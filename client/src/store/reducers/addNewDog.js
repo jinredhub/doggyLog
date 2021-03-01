@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) =>{
         case actionTypes.ADD_DOG_BASIC_INFO:{
             const newDog = {...state.newDog};
             newDog.date = action.date;
-            newDog.wegith = action.weight;
+            newDog.weight = action.weight;
 
             return {
                 ...state,

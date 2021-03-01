@@ -108,6 +108,7 @@ class Home extends Component {
                                 <form action="">
                                     <div style={{paddingTop: '50px'}}>
                                         <TextField
+                                            type='text'
                                             label='NAME'
                                             id='name'
                                             onChange={(ev)=>this.inputHandler(ev, 'name')}
@@ -118,6 +119,7 @@ class Home extends Component {
 
                                     <div style={{paddingTop: '55px'}}>
                                         <TextField
+                                            type='text'
                                             label='BREED'
                                             id='breed'
                                             onChange={(ev)=>this.inputHandler(ev, 'breed')}

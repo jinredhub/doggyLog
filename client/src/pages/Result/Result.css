@@ -35,3 +35,11 @@
 .Result .displayResultDiv span{
     color: #b79593;
 }
+
+/*media query----------------------------------------*/
+/*tablets*/
+@media (max-width: 768px){
+    .Result h2{
+        margin-top: 40px;
+    }
+}
