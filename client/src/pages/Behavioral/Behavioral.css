@@ -52,15 +52,37 @@
     height: 22px;
     margin-top: -9px;
     color: #553635;
+    z-index: 2;
 }
 .Behavioral .sliderScale{
     width: 6px;
     height: 6px;
     background-color: #b69593;
-    /* position: absolute; */
-    /* top: 35%; */
-    /* z-index: -1; */
     border-radius: 10px;
+}
+.Behavioral .sliderScaleDiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 35%;
+    left: 0;
+    z-index: 1;
+}
+.Behavioral .sliderLeftDot{
+    opacity: 0.2;
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    margin-right: 11px;
+    background-color: #b69593;
+}
+.Behavioral .sliderRightDot{
+    opacity: 0.2;
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    margin-left: 11px;
+    background-color: #b69593;
 }
 /* end range slider-------------------------- */
 
@@ -74,5 +96,9 @@
     .Behavioral .leftDiv{
         padding-right: 0 !important;
         padding-bottom: 90px;
+    }
+
+    .Behavioral .sliderScaleDiv{
+        top: 40%;
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import './Home.css';
 import Button from '@material-ui/core/Button';
@@ -65,12 +65,6 @@ class Home extends Component {
         }
     }
 
-    navigateAfterAjaxExample = () =>{
-        this.props.history.push({pathname: '/start'});
-        // or
-        // this.props.history.push('/start');
-    }
-
     render(){
         console.log('=========', this.state);
         console.log('this props: ', this.props);
@@ -110,119 +104,122 @@ class Home extends Component {
                         <div className='disp-flex' style={{paddingTop: '190px', paddingBottom: '60px'}}>
                             <div className='flex-50 leftDiv'>
                                 <h1>Your Doggy Profile</h1>
-                                <div style={{paddingTop: '50px'}}>
-                                    <TextField
-                                        label='NAME'
-                                        id='name'
-                                        onChange={(ev)=>this.inputHandler(ev, 'name')}
-                                        value={this.state.name}
-                                        style={{width: '100%', color: 'red'}}
-                                    />  
-                                </div>
 
-                                <div style={{paddingTop: '55px'}}>
-                                    <TextField
-                                        label='BREED'
-                                        id='breed'
-                                        onChange={(ev)=>this.inputHandler(ev, 'breed')}
-                                        value={this.state.breed}
-                                        style={{width: '100%'}}
-                                    />
-                                </div>
-
-                                <div style={{paddingTop: '74px', fontSize: '10px', color: '#b79593'}}>BIRTHDATE</div>
-
-                                <div style={{paddingTop: '19px', flexWrap: 'nowrap'}} className='disp-flex'>
-                                    <div className='flex-33' style={{paddingRight: '10px'}}>
-                                        <Select 
-                                            onChange={(ev)=>this.inputHandler(ev, 'month')}
-                                            value={this.state.birthdate.month}
-                                            style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
-                                            variant='filled'
-                                        >
-                                            <MenuItem value={1}>1</MenuItem>
-                                            <MenuItem value={2}>2</MenuItem>
-                                            <MenuItem value={3}>3</MenuItem>
-                                            <MenuItem value={4}>4</MenuItem>
-                                            <MenuItem value={5}>5</MenuItem>
-                                            <MenuItem value={6}>6</MenuItem>
-                                            <MenuItem value={7}>7</MenuItem>
-                                            <MenuItem value={8}>8</MenuItem>
-                                            <MenuItem value={9}>9</MenuItem>
-                                            <MenuItem value={10}>10</MenuItem>
-                                            <MenuItem value={11}>11</MenuItem>
-                                            <MenuItem value={12}>12</MenuItem>
-                                        </Select>
+                                <form action="">
+                                    <div style={{paddingTop: '50px'}}>
+                                        <TextField
+                                            label='NAME'
+                                            id='name'
+                                            onChange={(ev)=>this.inputHandler(ev, 'name')}
+                                            value={this.state.name}
+                                            style={{width: '100%', color: 'red'}}
+                                        />  
                                     </div>
-                                    <div className='flex-33' style={{paddingRight: '5px'}}>
-                                        <Select 
-                                            onChange={(ev)=>this.inputHandler(ev, 'day')}
-                                            value={this.state.birthdate.day}
-                                            style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
-                                            variant='filled'
-                                        >
-                                            <MenuItem value={1}>1</MenuItem>
-                                            <MenuItem value={2}>2</MenuItem>
-                                            <MenuItem value={3}>3</MenuItem>
-                                            <MenuItem value={4}>4</MenuItem>
-                                            <MenuItem value={5}>5</MenuItem>
-                                            <MenuItem value={6}>6</MenuItem>
-                                            <MenuItem value={7}>7</MenuItem>
-                                            <MenuItem value={8}>8</MenuItem>
-                                            <MenuItem value={9}>9</MenuItem>
-                                            <MenuItem value={10}>10</MenuItem>
-                                            <MenuItem value={11}>11</MenuItem>
-                                            <MenuItem value={13}>13</MenuItem>
-                                            <MenuItem value={14}>14</MenuItem>
-                                            <MenuItem value={15}>15</MenuItem>
-                                            <MenuItem value={16}>16</MenuItem>
-                                            <MenuItem value={17}>17</MenuItem>
-                                            <MenuItem value={18}>18</MenuItem>
-                                            <MenuItem value={19}>19</MenuItem>
-                                            <MenuItem value={20}>20</MenuItem>
-                                            <MenuItem value={21}>21</MenuItem>
-                                            <MenuItem value={22}>22</MenuItem>
-                                            <MenuItem value={23}>23</MenuItem>
-                                            <MenuItem value={24}>24</MenuItem>
-                                            <MenuItem value={25}>25</MenuItem>
-                                            <MenuItem value={26}>26</MenuItem>
-                                            <MenuItem value={27}>27</MenuItem>
-                                            <MenuItem value={28}>28</MenuItem>
-                                            <MenuItem value={29}>29</MenuItem>
-                                            <MenuItem value={30}>30</MenuItem>
-                                            <MenuItem value={31}>31</MenuItem>
-                                        </Select>
-                                    </div>
-                                    <div className='flex-33' style={{paddingLeft: '5px'}}>
-                                        <Select 
-                                            onChange={(ev)=>this.inputHandler(ev, 'year')}
-                                            value={this.state.birthdate.year}
-                                            style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
-                                            variant='filled'
-                                        >
-                                            <MenuItem value={1993}>1993</MenuItem>
-                                            <MenuItem value={1994}>1994</MenuItem>
-                                            <MenuItem value={1995}>1995</MenuItem>
-                                            <MenuItem value={1996}>1996</MenuItem>
-                                            <MenuItem value={1997}>1997</MenuItem>
-                                            <MenuItem value={1998}>1998</MenuItem>
-                                            <MenuItem value={1999}>1999</MenuItem>
-                                            <MenuItem value={2000}>2000</MenuItem>
-                                        </Select>
-                                    </div>
-                                </div>
 
-                                <div style={{paddingTop: '58px', textAlign: 'right'}}>
-                                    <Link to='/start'>
-                                        <Button 
-                                            variant='contained'
-                                            style={{backgroundColor: '#553635', color: 'white', fontSize: '14px'}}
-                                            onClick={()=>this.props.onDogAdded(this.state.name, this.state.breed, this.state.birthdate)}
-                                            // onClick={this.navigateAfterAjaxExample}
-                                        >NEXT
-                                        </Button>
-                                    </Link>
-                                </div>
+                                    <div style={{paddingTop: '55px'}}>
+                                        <TextField
+                                            label='BREED'
+                                            id='breed'
+                                            onChange={(ev)=>this.inputHandler(ev, 'breed')}
+                                            value={this.state.breed}
+                                            style={{width: '100%'}}
+                                        />
+                                    </div>
+
+                                    <div style={{paddingTop: '74px', fontSize: '10px', color: '#b79593'}}>BIRTHDATE</div>
+
+                                    <div style={{paddingTop: '19px', flexWrap: 'nowrap'}} className='disp-flex'>
+                                        <div className='flex-33' style={{paddingRight: '10px'}}>
+                                            <Select 
+                                                onChange={(ev)=>this.inputHandler(ev, 'month')}
+                                                value={this.state.birthdate.month}
+                                                style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
+                                                variant='filled'
+                                            >
+                                                <MenuItem value={1}>1</MenuItem>
+                                                <MenuItem value={2}>2</MenuItem>
+                                                <MenuItem value={3}>3</MenuItem>
+                                                <MenuItem value={4}>4</MenuItem>
+                                                <MenuItem value={5}>5</MenuItem>
+                                                <MenuItem value={6}>6</MenuItem>
+                                                <MenuItem value={7}>7</MenuItem>
+                                                <MenuItem value={8}>8</MenuItem>
+                                                <MenuItem value={9}>9</MenuItem>
+                                                <MenuItem value={10}>10</MenuItem>
+                                                <MenuItem value={11}>11</MenuItem>
+                                                <MenuItem value={12}>12</MenuItem>
+                                            </Select>
+                                        </div>
+                                        <div className='flex-33' style={{paddingRight: '5px'}}>
+                                            <Select 
+                                                onChange={(ev)=>this.inputHandler(ev, 'day')}
+                                                value={this.state.birthdate.day}
+                                                style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
+                                                variant='filled'
+                                            >
+                                                <MenuItem value={1}>1</MenuItem>
+                                                <MenuItem value={2}>2</MenuItem>
+                                                <MenuItem value={3}>3</MenuItem>
+                                                <MenuItem value={4}>4</MenuItem>
+                                                <MenuItem value={5}>5</MenuItem>
+                                                <MenuItem value={6}>6</MenuItem>
+                                                <MenuItem value={7}>7</MenuItem>
+                                                <MenuItem value={8}>8</MenuItem>
+                                                <MenuItem value={9}>9</MenuItem>
+                                                <MenuItem value={10}>10</MenuItem>
+                                                <MenuItem value={11}>11</MenuItem>
+                                                <MenuItem value={13}>13</MenuItem>
+                                                <MenuItem value={14}>14</MenuItem>
+                                                <MenuItem value={15}>15</MenuItem>
+                                                <MenuItem value={16}>16</MenuItem>
+                                                <MenuItem value={17}>17</MenuItem>
+                                                <MenuItem value={18}>18</MenuItem>
+                                                <MenuItem value={19}>19</MenuItem>
+                                                <MenuItem value={20}>20</MenuItem>
+                                                <MenuItem value={21}>21</MenuItem>
+                                                <MenuItem value={22}>22</MenuItem>
+                                                <MenuItem value={23}>23</MenuItem>
+                                                <MenuItem value={24}>24</MenuItem>
+                                                <MenuItem value={25}>25</MenuItem>
+                                                <MenuItem value={26}>26</MenuItem>
+                                                <MenuItem value={27}>27</MenuItem>
+                                                <MenuItem value={28}>28</MenuItem>
+                                                <MenuItem value={29}>29</MenuItem>
+                                                <MenuItem value={30}>30</MenuItem>
+                                                <MenuItem value={31}>31</MenuItem>
+                                            </Select>
+                                        </div>
+                                        <div className='flex-33' style={{paddingLeft: '5px'}}>
+                                            <Select 
+                                                onChange={(ev)=>this.inputHandler(ev, 'year')}
+                                                value={this.state.birthdate.year}
+                                                style={{width: '100%', backgroundColor: '#b39593', color: 'white'}}
+                                                variant='filled'
+                                            >
+                                                <MenuItem value={1993}>1993</MenuItem>
+                                                <MenuItem value={1994}>1994</MenuItem>
+                                                <MenuItem value={1995}>1995</MenuItem>
+                                                <MenuItem value={1996}>1996</MenuItem>
+                                                <MenuItem value={1997}>1997</MenuItem>
+                                                <MenuItem value={1998}>1998</MenuItem>
+                                                <MenuItem value={1999}>1999</MenuItem>
+                                                <MenuItem value={2000}>2000</MenuItem>
+                                            </Select>
+                                        </div>
+                                    </div>
+
+                                    <div style={{paddingTop: '58px', textAlign: 'right'}}>
+                                        <Link to='/start'>
+                                            <Button 
+                                                variant='contained'
+                                                style={{backgroundColor: '#553635', color: 'white', fontSize: '14px'}}
+                                                onClick={()=>this.props.onDogAdded(this.state.name, this.state.breed, this.state.birthdate)}
+                                            >NEXT
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </form>
+                                
                             </div>
                             <div className="flex-50 disp-flex justify-content--end rightDiv">
                                 <div style={{textAlign: 'center'}}>
@@ -246,11 +243,6 @@ class Home extends Component {
 const mapDispatchToProps = dispatch =>{
     return {
         onDogAdded: (name, breed, birthdate) => dispatch(actionCreators.addDog(name, breed, birthdate)),
-
-        // without middleware
-        // onDogAdded: (name, breed, birthdate) => dispatch({type: actionTypes.ADD_DOG, name: name, breed: breed, birthdate: birthdate}),
-        // or
-        // onDogAdded: (name, breed, birthdate) => dispatch({type: actionTypes.ADD_DOG, dog: {name: name, breed: breed}, birthdate: birthdate}),
     }
 }
 

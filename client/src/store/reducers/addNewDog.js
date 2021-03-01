@@ -2,30 +2,29 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     newDog: {},
-    dogData: [],
-    errorLoadingDb: false,
-    loading: false,
+    dogData: {},
 }
 
 const reducer = (state = initialState, action) =>{
     switch (action.type){
 
         case actionTypes.ADD_DOG: {
-            // ev and type will be in action
             // console.log('action: ', action);
+            // console.log('reducer state: ', state);
 
-            const dogData = {
+            const newDogData = {
                 id: Math.random(),
                 name: action.name,
                 breed: action.breed,
                 birthdate: action.birthdate,
             };
 
-            // console.log('reducer state: ', state);
-
             return {
                 ...state,
-                newDog: dogData
+                newDog: newDogData,
+                errorLoadingDb: false,
+                dbLoaded: false,
+                submitted: false,
             }
         }
 
@@ -40,27 +39,28 @@ const reducer = (state = initialState, action) =>{
             }
         }
 
-        case actionTypes.EMPTY_NEW_DOG_OBJECT: {
+        case actionTypes.FORM_SUBMITTED_SUCCESS: {
 
             return {
                 ...state,
+                submitted: true,
                 newDog: {}
             }
         }
 
-        case actionTypes.FETCH_DOG_DATA_START: {
-            return {
-                ...state,
-                loading: true,
-            }
-        }
+        // case actionTypes.FETCH_DOG_DATA_START: {
+        //     return {
+        //         ...state,
+        //         loading: true,
+        //     }
+        // }
 
         case actionTypes.FETCH_DOG_DATA_SUCCESS: {
             return {
                 ...state,
                 dogData: action.dogData,
                 errorLoadingDb: false,
-                loading: false,
+                dbLoaded: true,
             }
         }
 
@@ -68,7 +68,7 @@ const reducer = (state = initialState, action) =>{
             return {
                 ...state,
                 errorLoadingDb: true,
-                loading: false,
+                dbLoaded: true,
             }
         }
 

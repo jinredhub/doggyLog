@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 import './Start.css';
@@ -16,8 +17,12 @@ class Start extends Component {
         console.log('=========', this.state);
         console.log('this props, Start page: ', this.props);
 
+        const noDataRedirect = Object.keys(this.props.newDogGlobal).length === 0 ?  <Redirect to='/' /> : null;
+
         return (
             <div className='Start'>
+                {noDataRedirect}
+
                 <img src={doggyDataLogo} alt="doggy data" className='doggyDataImage'/>
 
                 <section>
@@ -26,7 +31,7 @@ class Start extends Component {
                             <img src={groupLogo} alt="group logo" style={{width: '105px'}}/>
                         </div>
 
-                        <h1 style={{paddingTop: '38px'}}>We're excited to meet {this.props.newDogGlobal.name}!</h1>
+                        <h1 style={{paddingTop: '38px'}}>We're excited to meet {this.props.newDogGlobal.name ? this.props.newDogGlobal.name : 'you'}!</h1>
 
                         <div style={{paddingTop: '58px'}}>
                             <Link to='/basic-info'>

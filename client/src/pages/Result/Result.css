@@ -12,6 +12,10 @@
     margin: 0;
     color: #b79593;
 }
+.Result h2{
+    font-size: 18px;
+    color: #b79593;
+}
 .Result .dogImgBg{
     background-color: #ecb047;
     width: 88px;
@@ -27,4 +31,7 @@
     position: absolute;
     left: 30px;
     top: 30px;
+}
+.Result .displayResultDiv span{
+    color: #b79593;
 }

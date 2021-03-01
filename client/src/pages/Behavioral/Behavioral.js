@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import './Behavioral.css';
 import groupLogo from '../../assets/group.png';
@@ -134,6 +134,10 @@ class Behavioral extends Component {
     render(){
         console.log('=========', this.state);
         console.log('this props, Behavioral page: ', this.props);
+
+        const noDataRedirect = Object.keys(this.props.newDogGlobal).length === 0 ?  <Redirect to='/' /> : null;
+        const submitAndRedirect = this.props.submittedGlobal ? <Redirect to='/result' /> : null;
+
         const theme = createMuiTheme({
             palette: {
                 primary: {
@@ -148,6 +152,9 @@ class Behavioral extends Component {
         return (
             <ThemeProvider theme={theme}>
                 <div className='Behavioral'>
+                    {noDataRedirect}
+                    {submitAndRedirect}
+
                     <img src={doggyDataLogo} alt="doggy data" className='doggyDataImage'/>
                     <section>
                         <div className='disp-flex flex-dir-col align-items--center' style={{paddingTop: '80px'}}>
@@ -231,7 +238,7 @@ class Behavioral extends Component {
                                 <div style={{paddingTop: '54px', paddingLeft: '33px', color: '#b69593', fontSize: '10px'}}>APPETITE</div>
                                 
                                 <div className='disp-flex align-items--center' style={{flexWrap: 'nowrap'}}>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginRight: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderLeftDot'></div>
                                     <div className='flex-50' style={{position: 'relative'}}>
                                         <Slider 
                                             value={this.state.dietary.appetite} 
@@ -240,7 +247,7 @@ class Behavioral extends Component {
                                             onChange={this.sliderHandler.bind(this, 'appetite')}
                                             step={1}
                                         />
-                                        <div className='disp-flex justify-content--space-between' style={{position: 'absolute', width: '100%', height: '100%', top: '35%', left: 0, zIndex: -1}}>
+                                        <div className='disp-flex justify-content--space-between sliderScaleDiv'>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
@@ -250,13 +257,13 @@ class Behavioral extends Component {
                                             <div className='sliderScale'></div>
                                         </div>
                                     </div>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginLeft: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderRightDot'></div>
                                 </div>
 
                                 <div style={{paddingLeft: '33px', color: '#b69593', fontSize: '10px'}}>WATER</div>
                                 
                                 <div className='disp-flex align-items--center' style={{flexWrap: 'nowrap'}}>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginRight: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderLeftDot'></div>
                                     <div className='flex-50' style={{position: 'relative'}}>
                                         <Slider 
                                             value={this.state.dietary.water} 
@@ -265,7 +272,7 @@ class Behavioral extends Component {
                                             onChange={this.sliderHandler.bind(this, 'water')}
                                             step={1}
                                         />
-                                        <div className='disp-flex justify-content--space-between' style={{position: 'absolute', width: '100%', height: '100%', top: '35%', left: 0, zIndex: -1}}>
+                                        <div className='disp-flex justify-content--space-between sliderScaleDiv'>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
@@ -275,13 +282,13 @@ class Behavioral extends Component {
                                             <div className='sliderScale'></div>
                                         </div>
                                     </div>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginLeft: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderRightDot'></div>
                                 </div>
 
                                 <div style={{paddingLeft: '33px', color: '#b69593', fontSize: '10px'}}>RESTROOM</div>
                                 
                                 <div className='disp-flex align-items--center' style={{flexWrap: 'nowrap'}}>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginRight: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderLeftDot'></div>
                                     <div className='flex-50' style={{position: 'relative'}}>
                                         <Slider 
                                             value={this.state.dietary.restroom} 
@@ -290,7 +297,7 @@ class Behavioral extends Component {
                                             onChange={this.sliderHandler.bind(this, 'restroom')}
                                             step={1}
                                         />
-                                        <div className='disp-flex justify-content--space-between' style={{position: 'absolute', width: '100%', height: '100%', top: '35%', left: 0, zIndex: -1}}>
+                                        <div className='disp-flex justify-content--space-between sliderScaleDiv'>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
                                             <div className='sliderScale'></div>
@@ -300,21 +307,19 @@ class Behavioral extends Component {
                                             <div className='sliderScale'></div>
                                         </div>
                                     </div>
-                                    <div style={{opacity: '0.2', width: '22px', height: '22px', borderRadius: '100px', marginLeft: '11px', backgroundColor: '#b69593'}}></div>
+                                    <div className='sliderRightDot'></div>
                                 </div>
                                 
                             </div>
                         </div>
 
                         <div style={{paddingTop: '139px', paddingBottom: '60px' ,textAlign: 'center'}}>
-                            <Link to='/result'>
-                                <Button 
-                                    variant='contained'
-                                    style={{backgroundColor: '#553635', color: 'white', fontSize: '14px', padding: '18px 23px', 'borderRadius': '10px'}}
-                                    onClick={()=>this.props.onDogBehavioralAdded(this.state.behave, this.state.dietary, this.props.newDogGlobal)}
-                                >NEXT
-                                </Button>
-                            </Link>
+                            <Button 
+                                variant='contained'
+                                style={{backgroundColor: '#553635', color: 'white', fontSize: '14px', padding: '18px 23px', 'borderRadius': '10px'}}
+                                onClick={()=>this.props.onDogBehavioralAdded(this.state.behave, this.state.dietary, this.props.newDogGlobal)}
+                            >NEXT
+                            </Button>
                         </div>
                     </section>
                 </div>
@@ -323,10 +328,10 @@ class Behavioral extends Component {
     }
 }
 
-// access state in reducer
 const mapStateToProps = state =>{
     return {
         newDogGlobal: state.addNewDogRedu.newDog,
+        submittedGlobal: state.addNewDogRedu.submitted,
     }
 }
 

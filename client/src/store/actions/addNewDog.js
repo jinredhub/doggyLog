@@ -33,22 +33,22 @@ export const addDogBehavioralThenPost = (behave, dietary, newDogObj) =>{
             }
             else{
                 console.log('successed');
-                dispatch(emptyNewDogObject());
+                dispatch(formSubmittedSuccess());
             }
         });
     }
 }
 
-export const emptyNewDogObject = () =>{
+export const formSubmittedSuccess = () =>{
     return {
-        type: actionTypes.EMPTY_NEW_DOG_OBJECT,
+        type: actionTypes.FORM_SUBMITTED_SUCCESS,
     }
 }
 
 export const getDogDataFromDb = () =>{
     return dispatch  => {
         // for loading icon
-        dispatch(fetchDogDataStart());
+        // dispatch(fetchDogDataStart());
 
         // fetch data
         const ref = firebase.database().ref();
@@ -62,11 +62,11 @@ export const getDogDataFromDb = () =>{
     }
 }
 
-export const fetchDogDataStart = () =>{
-    return {
-        type: actionTypes.FETCH_DOG_DATA_START,
-    }
-}
+// export const fetchDogDataStart = () =>{
+//     return {
+//         type: actionTypes.FETCH_DOG_DATA_START,
+//     }
+// }
 
 export const fetchDogDataSuccess = (dogData) =>{
     return {
