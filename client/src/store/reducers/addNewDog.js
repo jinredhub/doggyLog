@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     newDog: {},
     dogData: {},
+    disableSubmitButton : false,
 }
 
 const reducer = (state = initialState, action) =>{
@@ -25,6 +26,7 @@ const reducer = (state = initialState, action) =>{
                 errorLoadingDb: false,
                 dbLoaded: false,
                 submitted: false,
+                disableSubmitButton: false
             }
         }
 
@@ -45,6 +47,13 @@ const reducer = (state = initialState, action) =>{
                 ...state,
                 submitted: true,
                 newDog: {}
+            }
+        }
+
+        case actionTypes.DISABLE_SUBMIT_BUTTON: {
+            return {
+                ...state,
+                disableSubmitButton: true
             }
         }
 

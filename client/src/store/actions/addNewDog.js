@@ -19,11 +19,21 @@ export const addDogBasicInfo = (weight, date) =>{
     }
 }
 
+export const disableSubmitButton = () =>{
+    return {
+        type: actionTypes.DISABLE_SUBMIT_BUTTON
+    }
+}
+
 export const addDogBehavioralThenPost = (behave, dietary, newDogObj) =>{
     newDogObj.behave = behave;
     newDogObj.dietary = dietary;
 
+    console.log('submittin');
+
     return dispatch => {
+        dispatch(disableSubmitButton());
+
         // post data
         firebase.database().ref('myDogData').set({
             ...newDogObj

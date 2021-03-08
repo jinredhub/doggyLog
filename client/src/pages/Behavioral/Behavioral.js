@@ -318,6 +318,7 @@ class Behavioral extends Component {
                                 variant='contained'
                                 style={{backgroundColor: '#553635', color: 'white', fontSize: '14px', padding: '18px 23px', 'borderRadius': '10px'}}
                                 onClick={()=>this.props.onDogBehavioralAdded(this.state.behave, this.state.dietary, this.props.newDogGlobal)}
+                                disabled={this.props.disableSubmitButtonGlobal}
                             >NEXT
                             </Button>
                         </div>
@@ -332,6 +333,7 @@ const mapStateToProps = state =>{
     return {
         newDogGlobal: state.addNewDogRedu.newDog,
         submittedGlobal: state.addNewDogRedu.submitted,
+        disableSubmitButtonGlobal: state.addNewDogRedu.disableSubmitButton,
     }
 }
 
